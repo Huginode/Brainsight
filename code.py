@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
 # setting the path to the directory containing the pics
-pathN = '/dataset/no'
-pathY = '/dataset/yes'
+pathN = 'dataset/no'
+pathY = 'dataset/yes'
 
 # appending the the datasets lists
 trainingDataN = []
@@ -35,7 +35,12 @@ X2, y2 = np.load(os.path.join(pathN, 'features.npy'))
 y1 = y1.reshape((y1.shape[0], 1))
 y2 = y2.reshape((y2.shape[0], 1))
 
-# def init function
+dg = X1.shape
+df = y1.shape
+print(dg, df)
+
+
+# def init functiond
 def init(X):
     W = np.random.randn(X.shape[1], 1)
     b = np.random.randn(1)
@@ -55,7 +60,7 @@ def logLoss(A, y):
 
 
 # def gradient function
-def gradients (A, x, y):
+def gradients(A, x, y):
     dW = 1 / len(y) * np.dot(X.T, A - y)
     db = 1 / len(y) * np.sum(A - y)
     return (dW, db)
@@ -95,14 +100,14 @@ def predict(X, W, b):
     return A >= 0.5
 
 
-W, b = artificialNeuron(X, y)
-plt.show()
+#W, b = artificialNeuron(X, y)
+#plt.show()
 
 # args to draw the descision line
-x0 = np.linspace(0, 0, 100)
-x1 = (-W[0] * x0 - b) / W[1]
+#x0 = np.linspace(0, 0, 100)
+#x1 = (-W[0] * x0 - b) / W[1]
 
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
-plt.plot(x0, x1, c='orange', lw=3)
-plt.show()
-predict(X, W, b)
+#plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
+#plt.plot(x0, x1, c='orange', lw=3)
+#plt.show()
+#predict(X, W, b)
