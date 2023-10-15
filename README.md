@@ -8,3 +8,5 @@ For this:
 * Then I printed put the values in a numpy array
 * Then I used a linear regression model with the gradient descent algorithm to finally guess.
 
+## Issues
+FileNotFound (snif)
