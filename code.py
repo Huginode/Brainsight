@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from utilites import *
 
-# created dataset
-X, y =
-
-# ofc reshape y
-y = y.reshape((y.shape[0], 1))
+# loading the dataset
+X = np.load(os.path.join(pathy,'features.npy'))
+y  = np.load(os.path.join(pathn,'features.npy'))
 
 #graph plotting
 
