@@ -1,13 +1,39 @@
+import os
+import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
-from utilites import *
+
+# setting the path to the directory containing the pics
+pathN = '/dataset/no'
+pathY = '/dataset/yes'
+
+# appending the the datasets lists
+trainingDataN = []
+trainingDataY = []
+for img in os.listdir(pathN):
+    pic = cv2.IMREAD_ANYCOLOR(os.path.join(pathN, img))
+    pic = cv2.cvtColor()
+    pic = cv2.resize(pic, (80, 80))
+    trainingDataN.append([pic])
+
+for img in os.listdir(pathY):
+    pic = cv2.IMREAD_ANYCOLOR(os.path.join(pathY, img))
+    pic = cv2.cvtColor(pic, cv2.COLOR_BAYER_BG2GRAY)
+    pic = cv2.resize(pic, (80, 80))
+    trainingDataY.append([pic])
+
+# converting the list to numpy array and saving it to a file using
+np.save(os.path.join(pathN, 'features'), np.array(trainingDataN))
+np.save(os.path.join(pathY, 'features'), np.array(trainingDataY))
 
 # loading the dataset
-X = np.load(os.path.join(pathy,'features.npy'))
-y  = np.load(os.path.join(pathn,'features.npy'))
+X1, y1 = np.load(os.path.join(pathY, 'features.npy'))
+X2, y2 = np.load(os.path.join(pathN, 'features.npy'))
 
-#graph plotting
+# reshaping y
+y1 = y1.reshape((y1.shape[0], 1))
+y2 = y2.reshape((y2.shape[0], 1))
 
 # def init function
 def init(X):
@@ -15,15 +41,17 @@ def init(X):
     b = np.random.randn(1)
     return (W, b)
 
+
 # def the model
 def model(X, W, b):
     Z = X.dot(W) + b
     A = 1/(1 + np.exp(-Z))
     return A
 
+
 # def cost function
 def logLoss(A, y):
-    return 1 / len(y) * np.sum(-y * np.log(A) - (1 - y) * np.log(1 - A) )
+    return 1 / len(y) * np.sum(-y * np.log(A) - (1 - y) * np.log(1 - A))
 
 
 # def gradient function
@@ -38,6 +66,7 @@ def update(dW, db, W, b, learningRate):
     W = W - learningRate * dW
     b = b - learningRate * db
     return (W, b)
+
 
 # True algorithm
 def artificialNeuron(X, y, learningRate=0.1, nIter=100):
@@ -71,7 +100,7 @@ plt.show()
 
 # args to draw the descision line
 x0 = np.linspace(0, 0, 100)
-x1 = (-W[0] * x0 -b) / W[1]
+x1 = (-W[0] * x0 - b) / W[1]
 
 plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
 plt.plot(x0, x1, c='orange', lw=3)
