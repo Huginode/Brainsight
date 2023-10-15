@@ -12,8 +12,8 @@ pathY = 'dataset/yes'
 trainingDataN = []
 trainingDataY = []
 for img in os.listdir(pathN):
-    pic = cv2.IMREAD_ANYCOLOR(os.path.join(pathN, img))
-    pic = cv2.cvtColor()
+    pic = cv2.imread(os.path.join(pathN, img))
+    pic = cv2.cvtColor(pic, cv2.COLOR_BAYER_BG2GRAY)
     pic = cv2.resize(pic, (80, 80))
     trainingDataN.append([pic])
 
@@ -109,5 +109,4 @@ def predict(X, W, b):
 
 #plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
 #plt.plot(x0, x1, c='orange', lw=3)
-#plt.show()
 #predict(X, W, b)
