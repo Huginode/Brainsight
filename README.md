@@ -9,4 +9,4 @@ For this:
 * Then I used a linear regression model with the gradient descent algorithm to finally guess.
 
 ## Issues
-FileNotFound (snif)
+Type Error in the beginning of using opencv
