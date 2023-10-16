@@ -23,21 +23,17 @@ for img in os.listdir(pathY):
     pic = cv2.resize(pic, (80, 80))
     trainingDataY.append([pic])
 
+# concatenate the two lists for the dataset
+trainingData = trainingDataN + trainingDataY
+
 # converting the list to numpy array and saving it to a file using
-np.save(os.path.join(pathN, 'features'), np.array(trainingDataN))
-np.save(os.path.join(pathY, 'features'), np.array(trainingDataY))
+np.save(os.path.join(pathN, 'features'), np.array(trainingData))
 
 # loading the dataset
 X1, y1 = np.load(os.path.join(pathY, 'features.npy'))
-X2, y2 = np.load(os.path.join(pathN, 'features.npy'))
 
 # reshaping y
 y1 = y1.reshape((y1.shape[0], 1))
-y2 = y2.reshape((y2.shape[0], 1))
-
-dg = X1.shape
-df = y1.shape
-print(dg, df)
 
 
 # def init functiond
