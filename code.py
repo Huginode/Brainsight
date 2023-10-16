@@ -13,13 +13,13 @@ trainingDataN = []
 trainingDataY = []
 for img in os.listdir(pathN):
     pic = cv2.imread(os.path.join(pathN, img))
-    pic = cv2.cvtColor(pic, cv2.COLOR_BGR2BGRA)
+    pic = cv2.cvtColor(pic, cv2.COLOR_BGR2GRAY)
     pic = cv2.resize(pic, (80, 80))
     trainingDataN.append([pic])
 
 for img in os.listdir(pathY):
     pic1 = cv2.imread(os.path.join(pathY, img))
-    pic = cv2.cvtColor(pic1, cv2.COLOR_BGR2BGRA)
+    pic = cv2.cvtColor(pic1, cv2.COLOR_BGR2GRAY)
     pic = cv2.resize(pic, (80, 80))
     trainingDataY.append([pic])
 
