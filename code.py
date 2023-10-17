@@ -18,8 +18,8 @@ for img in os.listdir(pathN):
     trainingDataN.append([pic])
 
 for img in os.listdir(pathY):
-    pic1 = cv2.imread(os.path.join(pathY, img))
-    pic = cv2.cvtColor(pic1, cv2.COLOR_BGR2GRAY)
+    pic = cv2.imread(os.path.join(pathY, img))
+    pic = cv2.cvtColor(pic, cv2.COLOR_BGR2GRAY)
     pic = cv2.resize(pic, (80, 80))
     trainingDataY.append([pic])
 
@@ -27,13 +27,7 @@ for img in os.listdir(pathY):
 trainingData = trainingDataN + trainingDataY
 
 # converting the list to numpy array and saving it to a file using
-np.save(os.path.join(pathN, 'features'), np.array(trainingData))
-
-# loading the dataset
-X1, y1 = np.load(os.path.join(pathY, 'features.npy'))
-
-# reshaping y
-y1 = y1.reshape((y1.shape[0], 1))
+X = np.array(trainingData)
 
 
 # def init functiond
@@ -96,13 +90,13 @@ def predict(X, W, b):
     return A >= 0.5
 
 
-#W, b = artificialNeuron(X, y)
-#plt.show()
+W, b = artificialNeuron(X, y)
+plt.show()
 
 # args to draw the descision line
-#x0 = np.linspace(0, 0, 100)
-#x1 = (-W[0] * x0 - b) / W[1]
+x0 = np.linspace(0, 0, 100)
+x1 = (-W[0] * x0 - b) / W[1]
 
-#plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
-#plt.plot(x0, x1, c='orange', lw=3)
-#predict(X, W, b)
+plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
+plt.plot(x0, x1, c='orange', lw=3)
+predict(X, W, b)
