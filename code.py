@@ -29,8 +29,12 @@ trainingData = trainingDataN + trainingDataY
 # converting the list to numpy array
 X_train = np.array(trainingData)
 X_train = np.squeeze(X_train)
-y_train =
 
+# creating y axis using the trainingDataN and Y for labeling
+y_train1 = np.zeros(len(trainingDataN))
+y_train = np.ones(len(trainingDataY))
+y_train = np.concatenate((y_train1, y_train), axis=0)
+y_train = y_train.reshape((y_train.shape[0], 1))
 
 
 # def init functiond
