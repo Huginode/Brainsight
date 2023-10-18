@@ -9,8 +9,10 @@ For this:
 * Then I used a linear regression model with the gradient descent algorithm to finally guess.
 
 ## Issues
-Value error because of changing shapes
+Overflow in exp function
+encountering divide by 0 in log
+invalid valieues encoutered in multiply 
 
 ## Things to do
-input y value = 0 for trainingdataN and y = 1 for trainingdataY
+solve issues
 
