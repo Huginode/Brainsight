@@ -9,7 +9,7 @@ For this:
 * Then I used a linear regression model with the gradient descent algorithm to finally guess.
 
 ## Issues
-YOU HAVE TO REMOVE THE FILES CREATED IN THE DATASET (.npy) everytime you start it again
+Value error because of changing shapes
 
 ## Things to do
 
