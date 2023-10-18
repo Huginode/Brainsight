@@ -12,5 +12,5 @@ For this:
 YOU HAVE TO REMOVE THE FILES CREATED IN THE DATASET (.npy) everytime you start it again
 
 ## Things to do
-* Remove the features everytime, relocate them as well
+
 

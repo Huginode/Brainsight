@@ -26,8 +26,11 @@ for img in os.listdir(pathY):
 # concatenate the two lists for the dataset
 trainingData = trainingDataN + trainingDataY
 
-# converting the list to numpy array and saving it to a file using
+# converting the list to numpy array
 X = np.array(trainingData)
+X = np.squeeze(X)
+y = np.array(X[:, 0, 0])
+y = y.reshape((y.shape[0], 1))
 
 
 # def init functiond
