@@ -12,5 +12,5 @@ For this:
 Value error because of changing shapes
 
 ## Things to do
-
+input y value = 0 for trainingdataN and y = 1 for trainingdataY
 

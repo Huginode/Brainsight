@@ -27,10 +27,10 @@ for img in os.listdir(pathY):
 trainingData = trainingDataN + trainingDataY
 
 # converting the list to numpy array
-X = np.array(trainingData)
-X = np.squeeze(X)
-y = np.array(X[:, 0, 0])
-y = y.reshape((y.shape[0], 1))
+X_train = np.array(trainingData)
+X_train = np.squeeze(X_train)
+y_train =
+
 
 
 # def init functiond
@@ -53,8 +53,8 @@ def logLoss(A, y):
 
 
 # def gradient function
-def gradients(A, x, y):
-    dW = 1 / len(y) * np.dot(X.T, A - y)
+def gradients(A, X, y):
+    dW = 1 / len(y) * np.dot(X.T, A - y.T)
     db = 1 / len(y) * np.sum(A - y)
     return (dW, db)
 
@@ -93,13 +93,13 @@ def predict(X, W, b):
     return A >= 0.5
 
 
-W, b = artificialNeuron(X, y)
+W, b = artificialNeuron(X_train, y_train)
 plt.show()
 
 # args to draw the descision line
 x0 = np.linspace(0, 0, 100)
 x1 = (-W[0] * x0 - b) / W[1]
 
-plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
-plt.plot(x0, x1, c='orange', lw=3)
-predict(X, W, b)
+#plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
+#plt.plot(x0, x1, c='orange', lw=3)
+#predict(X, W, b)
