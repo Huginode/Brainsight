@@ -36,6 +36,9 @@ y_train = np.ones(len(trainingDataY))
 y_train = np.concatenate((y_train1, y_train), axis=0)
 y_train = y_train.reshape((y_train.shape[0], 1))
 
+# flatten the pixels to transform the X data in 2d. Otherwise it doesn't work
+X_train = X_train.reshape(X_train.shape[0], -1)
+# X_test = X_test.reshape(X_test.shape[0], -1)
 
 # def init functiond
 def init(X):
@@ -104,6 +107,6 @@ plt.show()
 x0 = np.linspace(0, 0, 100)
 x1 = (-W[0] * x0 - b) / W[1]
 
-#plt.scatter(X[:, 0], X[:, 1], c=y, cmap='summer')
-#plt.plot(x0, x1, c='orange', lw=3)
-#predict(X, W, b)
+plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap='summer')
+plt.plot(x0, x1, c='orange', lw=3)
+predict(X_train, W, b)
