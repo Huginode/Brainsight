@@ -34,11 +34,14 @@ X_train = np.squeeze(X_train)
 y_train1 = np.zeros(len(trainingDataN))
 y_train = np.ones(len(trainingDataY))
 y_train = np.concatenate((y_train1, y_train), axis=0)
-y_train = y_train.reshape((y_train.shape[0], 1))
+y = y_train.reshape((y_train.shape[0], 1))
 
 # flatten the pixels to transform the X data in 2d. Otherwise it doesn't work
-X_train = X_train.reshape(X_train.shape[0], -1)
-# X_test = X_test.reshape(X_test.shape[0], -1)
+X = X_train.reshape(X_train.shape[0], -1)
+
+# normalisation des donnes les photos sont en 8 bits donc le min est 0 donc la fonction se simplifie
+X = X_train.reshape(X_train.shape[0], -1) / X_train.max()
+
 
 # def init functiond
 def init(X):
@@ -47,7 +50,7 @@ def init(X):
     return (W, b)
 
 
-# def the model
+# def the model with sigmoid function
 def model(X, W, b):
     Z = X.dot(W) + b
     A = 1/(1 + np.exp(-Z))
@@ -56,7 +59,8 @@ def model(X, W, b):
 
 # def cost function
 def logLoss(A, y):
-    return 1 / len(y) * np.sum(-y * np.log(A) - (1 - y) * np.log(1 - A))
+    epsilon = 1e-15
+    return 1 / len(y) * np.sum(-y * np.log(A + epsilon) - (1 - y) * np.log(1 - A + epsilon))
 
 
 # def gradient function
@@ -74,22 +78,35 @@ def update(dW, db, W, b, learningRate):
 
 
 # True algorithm
-def artificialNeuron(X, y, learningRate=0.1, nIter=100):
+def artificialNeuron(X, y, learningRate, nIter):
     # init W and b parameters
     W, b = init(X)
     loss = []
+   #acc = []
 
     for i in range(nIter):
+
+        # loading the model
         A = model(X, W, b)
+
+        # cost calculation
         loss.append(logLoss(A, y))
+
+        # accuracy calculation
+        yPred = predict(X, W, b)
+        #acc.append(accuracy_score(y, yPred))
+
+        # updating the parameters
         dW, db = gradients(A, X, y)
         W, b = update(dW, db, W, b, learningRate)
 
-    yPred = predict(X, W, b)
-    print(accuracy_score(y, yPred))
-
+    # plotting the graphs
+    plt.figure(figsize=(12, 4))
+    plt.subplot(1, 2, 1)
     plt.plot(loss)
-    plt.show
+   # plt.subplot(1, 2, 1)
+   # plt.plot(acc)
+    plt.show()
 
     return (W, b)
 
@@ -100,13 +117,13 @@ def predict(X, W, b):
     return A >= 0.5
 
 
-W, b = artificialNeuron(X_train, y_train)
-plt.show()
+W, b = artificialNeuron(X, y, learningRate=0.01, nIter=1000)
 
 # args to draw the descision line
-x0 = np.linspace(0, 0, 100)
-x1 = (-W[0] * x0 - b) / W[1]
+#x0 = np.linspace(0, 0, 100)
+#x1 = (-W[0] * x0 - b) / W[1]
 
-plt.scatter(X_train[:, 0], X_train[:, 1], c=y_train, cmap='summer')
-plt.plot(x0, x1, c='orange', lw=3)
-predict(X_train, W, b)
+#plt.scatter(X[:, 0], X[:, 1], c=y_train, cmap='summer')
+#plt.plot(x0, x1, c='orange', lw=3)
+#predict(X, W, b)
+#plt.show()
