@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from tqdm import tqdm
 
 # setting the path to the directory containing the pics
 pathN = 'dataset/no'
@@ -41,7 +42,6 @@ X = X_train.reshape(X_train.shape[0], -1)
 
 # normalisation des donnes les photos sont en 8 bits donc le min est 0 donc la fonction se simplifie
 X = X_train.reshape(X_train.shape[0], -1) / X_train.max()
-
 
 # def init functiond
 def init(X):
@@ -84,25 +84,25 @@ def artificialNeuron(X, y, learningRate, nIter):
     loss = []
    #acc = []
 
-    for i in range(nIter):
-
+    for i in tqdm(range(nIter)):
         # loading the model
         A = model(X, W, b)
 
-        # cost calculation
-        loss.append(logLoss(A, y))
-
-        # accuracy calculation
-        yPred = predict(X, W, b)
-        #acc.append(accuracy_score(y, yPred))
+        # make code not so slow
+        if i %25 == 0:
+            # cost calculation
+            loss.append(logLoss(A, y))
+            # accuracy calculation
+            yPred = predict(X, W, b)
+            #acc.append(accuracy_score(y, yPred))
 
         # updating the parameters
         dW, db = gradients(A, X, y)
         W, b = update(dW, db, W, b, learningRate)
 
     # plotting the graphs
-    plt.figure(figsize=(12, 4))
-    plt.subplot(1, 2, 1)
+   # plt.figure(figsize=(12, 4))
+   # plt.subplot(1, 2, 1)
     plt.plot(loss)
    # plt.subplot(1, 2, 1)
    # plt.plot(acc)
