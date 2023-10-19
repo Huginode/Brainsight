@@ -94,18 +94,16 @@ def artificialNeuron(X, y, learningRate, nIter):
             loss.append(logLoss(A, y))
             # accuracy calculation
             yPred = predict(X, W, b)
-            #acc.append(accuracy_score(y, yPred))
+            # acc.append(accuracy_score(y, yPred))
 
         # updating the parameters
         dW, db = gradients(A, X, y)
         W, b = update(dW, db, W, b, learningRate)
 
     # plotting the graphs
-   # plt.figure(figsize=(12, 4))
-   # plt.subplot(1, 2, 1)
+    plt.figure(figsize=(12, 4))
+    plt.subplot(1, 2, 1)
     plt.plot(loss)
-   # plt.subplot(1, 2, 1)
-   # plt.plot(acc)
     plt.show()
 
     return (W, b)
@@ -120,10 +118,10 @@ def predict(X, W, b):
 W, b = artificialNeuron(X, y, learningRate=0.01, nIter=1000)
 
 # args to draw the descision line
-#x0 = np.linspace(0, 0, 100)
-#x1 = (-W[0] * x0 - b) / W[1]
+# x0 = np.linspace(0, 0, 100)
+# x1 = (-W[0] * x0 - b) / W[1]
 
-#plt.scatter(X[:, 0], X[:, 1], c=y_train, cmap='summer')
-#plt.plot(x0, x1, c='orange', lw=3)
-#predict(X, W, b)
-#plt.show()
+# plt.scatter(X[:, 0], X[:, 1], c=y_train, cmap='summer')
+# plt.plot(x0, x1, c='orange', lw=3)
+# predict(X, W, b)
+# plt.show()
