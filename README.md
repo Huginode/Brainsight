@@ -9,10 +9,7 @@ For this:
 * Then I used a linear regression model with the gradient descent algorithm to finally guess.
 
 ## Issues
-Overflow in exp function
-encountering divide by 0 in log
-invalid valieues encoutered in multiply 
 
 ## Things to do
-solve issues
+Just the graph is ascending (it should be descending)
 
