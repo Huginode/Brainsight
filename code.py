@@ -38,10 +38,10 @@ y_train = np.concatenate((y_train1, y_train), axis=0)
 y = y_train.reshape((y_train.shape[0], 1))
 
 # flatten the pixels to transform the X data in 2d. Otherwise it doesn't work
-X = X_train.reshape(X_train.shape[0], -1)
+X_train = X_train.reshape(X_train.shape[0], -1)
 
 # normalisation des donnes les photos sont en 8 bits donc le min est 0 donc la fonction se simplifie
-X = X_train.reshape(X_train.shape[0], -1) / X_train.max()
+X = X_train / X_train.max()
 
 # def init functiond
 def init(X):
@@ -89,7 +89,7 @@ def artificialNeuron(X, y, learningRate, nIter):
         A = model(X, W, b)
 
         # make code not so slow
-        if i %25 == 0:
+        if i % 25 == 0:
             # cost calculation
             loss.append(logLoss(A, y))
             # accuracy calculation
