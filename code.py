@@ -8,6 +8,7 @@ from tqdm import tqdm
 # setting the path to the directory containing the pics
 pathN = 'dataset/no'
 pathY = 'dataset/yes'
+pathT = 'dataset/testset'
 
 # appending the the datasets lists
 trainingDataN = []
@@ -42,6 +43,7 @@ X_train = X_train.reshape(X_train.shape[0], -1)
 
 # normalisation des donnes les photos sont en 8 bits donc le min est 0 donc la fonction se simplifie
 X = X_train / X_train.max()
+
 
 # def init functiond
 def init(X):
